@@ -1,0 +1,102 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C++: Debug Build",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-lc",
+                "g++ -fdiagnostics-color=always -g3 \"${file}\" -o \"${fileDirname}/${fileBasenameNoExtension}.bin\" -std=gnu++17 -Wall -Wextra -O0 -DONLINE_JUDGE -I/opt/ac-library"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build with g++ (no cpptools extension required)"
+        },
+        {
+            "label": "C++: Release Build",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-lc",
+                "g++ -fdiagnostics-color=always \"${file}\" -o \"${fileDirname}/a.out\" -std=gnu++17 -Wall -Wextra -O2 -DONLINE_JUDGE -I/opt/ac-library"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Optimized build with g++"
+        },
+        {
+            "label": "Begin AtCoder contest",
+            "type": "shell",
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            },
+            "command": "/bin/bash",
+            "args": [
+                "-lc",
+                "acc new ${input:param1}"
+            ]
+        },
+        {
+            "label": "Test AtCoder code",
+            "type": "shell",
+            "dependsOn": [
+                "C++: Debug Build"
+            ],
+            "command": "/bin/bash",
+            "args": [
+                "-lc",
+                "oj t -c \"${fileDirname}/${fileBasenameNoExtension}.bin\" -d \"${fileDirname}/test\""
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Submit AtCoder code",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-lc",
+                "acc s"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "dependsOn": [
+                "Test AtCoder code"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "param1",
+            "description": "コンテスト名を入力してください",
+            "default": "abc001",
+            "type": "promptString"
+        }
+    ]
+}

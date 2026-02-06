@@ -1,0 +1,20 @@
+{
+	"name": "atcoder",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "atcoder",
+	"workspaceFolder": "/atcoder",
+	"shutdownAction": "stopCompose",
+	"overrideCommand": false,
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"files.eol": "\n",
+				"remote.autoForwardPorts": false
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-vscode.cpptools"
+			]
+		}
+	}
+}

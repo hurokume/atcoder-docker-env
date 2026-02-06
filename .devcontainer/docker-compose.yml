@@ -1,0 +1,20 @@
+services:
+  atcoder:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: bind
+        source: ../.vscode
+        target: /atcoder/.vscode
+        consistency: cached
+      - type: bind
+        source: ../problems
+        target: /atcoder/problems
+        consistency: cached
+      - type: bind
+        source: ../acc-templates
+        target: /atcoder/acc-templates
+        consistency: cached
