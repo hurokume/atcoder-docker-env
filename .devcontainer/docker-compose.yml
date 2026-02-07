@@ -3,6 +3,8 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
+    environment:
+      HOME: /atcoder
     tty: true
     stdin_open: true
     volumes:

@@ -2,7 +2,7 @@
 	"name": "atcoder",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "atcoder",
-	"workspaceFolder": "/atcoder",
+	"workspaceFolder": "/atcoder/problems",
 	"shutdownAction": "stopCompose",
 	"overrideCommand": false,
 	"customizations": {

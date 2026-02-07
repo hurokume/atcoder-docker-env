@@ -36,8 +36,16 @@ RUN set -eux; \
   command -v oj; \
   oj --version
 
+ENV HOME=/atcoder
+ENV ACC_CONFIG_DIR=/atcoder/.config/atcoder-cli-nodejs
+
 RUN set -eux; \
+  mkdir -p /atcoder/.config; \
+  HOME=/atcoder XDG_CONFIG_HOME=/atcoder/.config \
   acc config oj-path "$(command -v oj)"; \
-  acc config default_workspace "/atcoder/problems"; \
-  acc config default_task_choice all; \
-  acc config default_template "/atcoder/acc-templates";
+  HOME=/atcoder XDG_CONFIG_HOME=/atcoder/.config \
+  acc config default-workspace "/atcoder/problems"; \
+  HOME=/atcoder XDG_CONFIG_HOME=/atcoder/.config \
+  acc config default-task-choice all; \
+  HOME=/atcoder XDG_CONFIG_HOME=/atcoder/.config \
+  acc config default-template "/atcoder/acc-templates/cpp"
