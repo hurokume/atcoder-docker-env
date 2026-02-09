@@ -49,7 +49,7 @@
             "command": "/bin/bash",
             "args": [
                 "-lc",
-                "acc new ${input:param1}"
+                "acc new -d /atcoder/problems/${input:param1} ${input:param1}"
             ]
         },
         {
@@ -61,7 +61,7 @@
             "command": "/bin/bash",
             "args": [
                 "-lc",
-                "oj t -c \"${fileDirname}/${fileBasenameNoExtension}.bin\" -d \"${fileDirname}/test\""
+                "oj t -c \"${fileDirname}/${fileBasenameNoExtension}.bin\" -d \"${fileDirname}/tests\""
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -76,19 +76,24 @@
             }
         },
         {
-            "label": "Submit AtCoder code",
+            "label": "Submit AtCoder code (oj)",
             "type": "shell",
             "command": "/bin/bash",
             "args": [
                 "-lc",
-                "acc s"
+                "set -e; cfg='${fileDirname}/contest.acc.json'; contest=$(jq -r '.contest_id' \"$cfg\"); problem=$(jq -r '.problem_id' \"$cfg\"); url=\"https://atcoder.jp/contests/$contest/tasks/$problem\"; echo \"Submitting to $url\"; oj s \"$url\" \"${file}\""
             ],
             "options": {
                 "cwd": "${fileDirname}"
             },
             "dependsOn": [
                 "Test AtCoder code"
-            ]
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": false
+            }
         }
     ],
     "inputs": [

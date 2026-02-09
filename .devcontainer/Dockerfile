@@ -49,3 +49,8 @@ RUN set -eux; \
   acc config default-task-choice all; \
   HOME=/atcoder XDG_CONFIG_HOME=/atcoder/.config \
   acc config default-template "/atcoder/acc-templates/cpp"
+
+RUN set -eux; \
+  git clone https://github.com/atcoder/ac-library /opt/ac-library
+
+ENV CPLUS_INCLUDE_PATH=/opt/ac-library
