@@ -81,7 +81,7 @@
             "command": "/bin/bash",
             "args": [
                 "-lc",
-                "set -e; cfg='${fileDirname}/contest.acc.json'; contest=$(jq -r '.contest_id' \"$cfg\"); problem=$(jq -r '.problem_id' \"$cfg\"); url=\"https://atcoder.jp/contests/$contest/tasks/$problem\"; echo \"Submitting to $url\"; oj s \"$url\" \"${file}\""
+                "set -euo pipefail; problem_dir=\"${fileDirname}\"; contest=$(basename \"$(dirname \"$problem_dir\")\"); task_label=$(basename \"$problem_dir\"); problem=\"${contest}_${task_label}\"; url=\"https://atcoder.jp/contests/$contest/tasks/$problem\"; echo \"Submitting to $url\"; oj s \"$url\" \"${file}\""
             ],
             "options": {
                 "cwd": "${fileDirname}"
